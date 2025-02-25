@@ -4,9 +4,13 @@
 
 ## 添加域名卡片
 ```
- { name: "example.com", desc: ["中文说明", "English"], link: "https://example.com", sold: false },
+ { name: "example.com", desc: ["中文说明", "English instructions"], link: "https://example.com", sold: false },
 ```
- false=未出售；true=已出售   
+ 把example.com修改成自己的域名；   
+ "中文说明", "English instructions"分别对应中英文说明；  
+ link后添加要跳转的链接；
+ false=未出售；true=已出售。   
+
  域名卡片顺序依次排列，根据需要自行调整。   
  源码中已有域名卡片仅为示例，请删除并添加自己的域名。
 
@@ -17,7 +21,7 @@
  <a href="https://friend3.com" target="_blank" rel="noopener noreferrer" data-i18n="friend3">王五</a>
  <a href="https://friend4.com" target="_blank" rel="noopener noreferrer" data-i18n="friend4">赵六</a>
 ```
-修改以上链接同时也要修改下国际化配置，才能在中英文模式下正常显示。
+修改以上链接同时也要修改一下国际化配置，才能在中英文模式下正常显示。
 ```
  // 国际化配置
  zh: {
