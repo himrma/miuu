@@ -8,7 +8,7 @@
 ```
  把example.com修改成自己的域名；   
  "中文说明", "English instructions"分别对应中英文说明；  
- link后添加要跳转的链接；
+ link后添加要跳转的链接；    
  false=未出售；true=已出售。   
 
  域名卡片顺序依次排列，根据需要自行调整。   
@@ -21,7 +21,8 @@
  <a href="https://friend3.com" target="_blank" rel="noopener noreferrer" data-i18n="friend3">王五</a>
  <a href="https://friend4.com" target="_blank" rel="noopener noreferrer" data-i18n="friend4">赵六</a>
 ```
-修改以上链接同时也要修改一下国际化配置，才能在中英文模式下正常显示。
+修改以上链接同时也要修改一下国际化配置，才能在中英文模式下正常显示。   
+添加更多友链，自行增加friend5/6/7……并在国际化配置中同步增加。
 ```
  // 国际化配置
  zh: {
