@@ -25,6 +25,7 @@
 添加更多友链，自行增加friend5/6/7……并在国际化配置中同步增加。
 ```
  // 国际化配置
+const i18n = {
  zh: {
    friend1: "张三",
    friend2: "李四",
@@ -37,7 +38,8 @@
    friend2: "Lisi",
    friend3: "Wangwu",
    friend4: "Zhaoliu",
-   },
+   }
+};
 ```
 
 ## 其他修改
