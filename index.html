@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>域名出售 - Domains for sale!</title>
+  <link rel="icon" type="image/x-icon" href="icon/miuu.svg">
+  <link rel="apple-touch-icon" href="icon/miuu.svg">
+  <meta name="apple-mobile-web-app-title" content="域名出售 - Domains for sale!">
+  <link rel="bookmark" href="icon/miuu.svg">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="icon/miuu.svg">
+  <link rel="stylesheet" href="icon/fontello/css/fontello.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script defer src="https://umami.macccc.com/random-string.js"
+    data-website-id="6584c76e-7c17-4c34-b697-bd75e2553df4"></script>
+  <style>
+    :root {
+      --bg-color: #f0f0f0;
+      --text-color: #333333;
+      --card-bg: #ffffff;
+      --primary-color: #2633C0;
+      --buy-btn-color: #007bff;
+      --buy-btn-color-1: #41b9ffb2;
+      --domain-text-color: #007bff;
+      --transition: all 0.1s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #f8f9fa;
+      --card-bg: #2d2d2d;
+      --primary-color: #007bff;
+      --buy-btn-color: #2633C0;
+      --buy-btn-color-1: #215cca91;
+      --domain-text-color: #64b4ff;
+    }
+
+    * {
+      transition: var(--transition);
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* 字体设置 */
+    :lang(zh) {
+      font-family: 'MiSans', 'Montserrat', sans-serif;
+    }
+
+    :lang(zh) .domain-card h2 {
+      font-family: 'Montserrat Medium', sans-serif;
+      color: var(--domain-text-color);
+    }
+
+    :lang(en) .domain-card h2 {
+      font-family: 'Montserrat Medium', sans-serif;
+      color: var(--domain-text-color);
+    }
+
+    :lang(en) {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 控制栏 */
+    .control-bar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 5px;
+      z-index: 100;
+    }
+
+    .control-btn {
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--text-color);
+      background-color: var(--card-bg);
+      width: 35px;
+      height: 35px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .control-btn:hover {
+      background-color: var(--buy-btn-color-1);
+    }
+
+
+    /* 标题样式 */
+    .header {
+      text-align: center;
+      padding: 0px 0;
+    }
+
+    /* 联系方式卡片 */
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 10px;
+      margin: 30px auto;
+      text-align: center;
+      max-width: 1200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-email {
+      margin: 5px 0;
+    }
+
+    .contact-email a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .contact-email a:hover {
+      color: #007bff;
+    }
+
+    /* 域名卡片 */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      padding: 0px 0;
+    }
+
+    .domain-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: cardEntrance 0.6s ease-out;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(0);
+    }
+
+    .domain-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--buy-btn-color);
+      box-shadow: 0 8px 16px var(--buy-btn-color);
+
+      .buy-btn:not(.sold) {
+        background: linear-gradient(135deg, var(--primary-color), var(--buy-btn-color));
+      }
+    }
+
+    .buy-btn {
+      display: inline-block;
+      background: var(--buy-btn-color-1);
+      color: #fff;
+      width: 100%;
+      text-align: center;
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      margin-top: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: none;
+      cursor: pointer;
+    }
+
+    .buy-btn:hover:not(.sold) {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 已售样式 */
+    .domain-card.sold-out {
+      opacity: 0.7;
+    }
+
+    .domain-card.sold-out h2,
+    .domain-card.sold-out p {
+      text-decoration: line-through;
+    }
+
+    .buy-btn.sold {
+      background: linear-gradient(135deg, #999, #666);
+      cursor: not-allowed;
+    }
+
+    /* 友情链接 */
+    .friend-links {
+      padding: 20px 0;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .friend-links h4 {
+      width: 100%;
+      color: #666;
+      margin-bottom: 0px;
+    }
+
+    .friend-links a {
+      background: var(--card-bg);
+      color: var(--text-color);
+      text-decoration: none;
+      height: 40px;
+      padding: 8px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .friend-links a:hover {
+      background: var(--buy-btn-color);
+      color: white;
+    }
+
+    /* 底部样式 */
+    .footer {
+      text-align: center;
+      padding: 10px 0 10px;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .footer a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #007bff;
+    }
+
+    /* 返回顶部 */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-to-top:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .domain-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .domain-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .domain-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .control-bar {
+        top: 15px;
+        right: 15px;
+      }
+    }
+
+    /* 滚动条整体部分 */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+      background-color: #666;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background-clip: content-box;
+    }
+
+    /* 滚动条轨道（背景） */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 控制栏 -->
+    <div class="control-bar">
+      <i class="control-btn fas icon-language" id="langToggle"></i>
+      <i class="control-btn fas icon-sun" id="themeToggle"></i>
+    </div>
+
+    <!-- 标题 -->
+    <header class="header">
+      <h1 data-i18n="title">域名出售</h1>
+      <div class="contact-card">
+        <p class="contact-email" data-i18n="contactText">联系方式</p>
+        <p class="contact-email">
+          <a href="mailto:contact@domain.com" data-i18n="contactEmail">contact@domain.com</a>
+        </p>
+      </div>
+    </header>
+
+    <!-- 域名列表 -->
+    <div class="domain-grid" id="domainList"></div>
+
+    <!-- 友情链接 -->
+    <div class="friend-links">
+      <h4 data-i18n="partner">米友友链</h4>
+      <a href="https://friend1.com" target="_blank" rel="noopener noreferrer" data-i18n="friend1">friend1</a>
+      <a href="https://friend2.com" target="_blank" rel="noopener noreferrer" data-i18n="friend2">friend2</a>
+      <a href="https://friend3.com" target="_blank" rel="noopener noreferrer" data-i18n="friend3">friend3</a>
+      <a href="https://friend4.com" target="_blank" rel="noopener noreferrer" data-i18n="friend4">friend4</a>
+    </div>
+
+    <!-- 版权信息 -->
+    <div class="footer">
+      <p>© 2025 <a href="https://MIUU.TOP">MIUU.TOP</a></p>
+    </div>
+
+    <!-- 返回顶部 -->
+    <div class="back-to-top"><i class="fas icon-up"></i></div>
+  </div>
+
+  <script>
+    // 国际化配置
+    const i18n = {
+      zh: {
+        title: "域名出售",
+        contactText: "联系方式",
+        contactEmail: "contact@domain.com",
+        partner: "米友友链",
+        friend1: "friend1",
+        friend2: "friend2",
+        friend3: "friend3",
+        friend4: "friend4",
+        copyright: "© 2025 MIUU.TOP",
+        design: "",
+        buy: "立即购买",
+        sold: "已出售"
+      },
+      en: {
+        title: "Domains for sale!",
+        contactText: "contact",
+        contactEmail: "contact@domain.com",
+        partner: "Friendly Link",
+        friend1: "friend1",
+        friend2: "friend2",
+        friend3: "friend3",
+        friend4: "friend4",
+        copyright: "© 2025 MIUU.TOP",
+        design: "",
+        buy: "Buy Now",
+        sold: "Sold Out"
+      }
+    };
+
+    // 域名数据  false=未出售 true=已出售
+    const domains = [
+      { name: "techwave.io", desc: ["科技浪潮首选域名", "Tech Innovation Hub"], link: "#", sold: false },
+      { name: "smartai.pro", desc: ["人工智能领域优选", "AI Solutions Platform"], link: "#", sold: true },
+      { name: "cloudnest.net", desc: ["云计算服务平台", "Cloud Service Provider"], link: "#", sold: false },
+      { name: "digimart.com", desc: ["数字营销最佳选择", "Digital Marketing Solutions"], link: "#", sold: false },
+      { name: "foodiejoy.cn", desc: ["美食爱好者专属", "Food Enthusiasts Community"], link: "#", sold: true },
+      { name: "ecogreen.org", desc: ["环保生态领域域名", "Eco-friendly Solutions"], link: "#", sold: false },
+      { name: "gamehub.live", desc: ["游戏直播平台域名", "Gaming Live Platform"], link: "#", sold: false },
+      { name: "finwise.biz", desc: ["金融理财智慧之选", "Financial Services"], link: "#", sold: false },
+      { name: "health360.fit", desc: ["健康生活全方位", "Health & Wellness"], link: "#", sold: false },
+      { name: "edupedia.edu", desc: ["教育知识宝库", "Education Resources"], link: "#", sold: false },
+      { name: "travelbug.cc", desc: ["旅行爱好者专属", "Travel Community"], link: "#", sold: false },
+      { name: "fashionist.me", desc: ["时尚达人必备", "Fashion Trends"], link: "#", sold: false },
+    ];
+
+    // 系统初始化
+    let currentLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
+
+    // 主题管理
+    const themeToggle = document.getElementById('themeToggle');
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      themeToggle.classList.toggle('icon-sun');
+      themeToggle.classList.toggle('icon-moon');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    // 语言切换
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (el.tagName === 'INPUT') {
+          el.placeholder = i18n[lang][key];
+        } else {
+          el.textContent = i18n[lang][key];
+        }
+      });
+      renderDomains();
+      localStorage.setItem('lang', lang);
+    }
+
+    // 域名卡片渲染
+    function renderDomains() {
+      const container = document.getElementById('domainList');
+      container.innerHTML = domains.map(domain => `
+                <div class="domain-card ${domain.sold ? 'sold-out' : ''}">
+                    <h2>${domain.name}</h2>
+                    <p>${domain.desc[currentLang === 'zh' ? 0 : 1]}</p>
+                    ${domain.sold ?
+          `<div class="buy-btn sold">${i18n[currentLang].sold}</div>` :
+          `<a href="${domain.link}" target="_blank" rel="noopener noreferrer" class="buy-btn">${i18n[currentLang].buy}</a>`}
+                </div>
+            `).join('');
+    }
+
+    // 返回顶部按钮
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      const show = window.scrollY > 100;
+      backToTop.style.opacity = show ? 1 : 0;
+      backToTop.style.visibility = show ? 'visible' : 'hidden';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 初始化
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    );
+    themeToggle.classList.add(
+      document.documentElement.getAttribute('data-theme') === 'dark' ? 'fa-moon' : 'fa-sun'
+    );
+    setLanguage(localStorage.getItem('lang') || currentLang);
+
+    // 事件监听
+    themeToggle.addEventListener('click', toggleTheme);
+    document.getElementById('langToggle').addEventListener('click', () => {
+      setLanguage(currentLang === 'zh' ? 'en' : 'zh');
+    });
+  </script>
+</body>
+
+</html>
